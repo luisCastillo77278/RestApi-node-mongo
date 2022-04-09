@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title:
+  version: 0.1.0
+paths:
+  /api/categories:
+    get: 
+      summary: Retorna un objecto con los datos de las categorias, así como información detallada de paginación, total de datos en la petición, total de datos y total de paginas.
+      tags:
+        - Categories
+      responses:
+        "200":
+          description: Permite listar los datos de las categorias de productos que tenemos.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        nombre:
+                          type: string
+                        estado:
+                          type: boolean
+                        id:
+                          type: string
+                        usuario:
+                          type: object
+                          properties:
+                            nombre:
+                              type: string
+                            correo:
+                              type: string
+                            rol:
+                              type: string
+                            estado:
+                              type: boolean
+                            id:
+                              type: string
+                  totalDocs:
+                    type: number
+                  limit:
+                    type: number
+                  totalPages:
+                    type: number
+                  page:
+                    type: number
+                  pagingCounter:
+                    type: number
+                  hasPrevPag:
+                    type: boolean
+                  hasNextPag:
+                    type: boolean
