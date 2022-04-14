@@ -65,10 +65,6 @@ class Server {
     this.app.use(this.productPath, require('../routes/product'));
     this.app.use(this.searchPath, require('../routes/search'));
     this.app.use(this.filePath, require('../routes/uploads'));
-    // handling errors
-    // this.app.use((req, res) =>
-    //   res.status(404).json({ errors: '404 not found' })
-    // );
   }
 
   socketsEvent() {
