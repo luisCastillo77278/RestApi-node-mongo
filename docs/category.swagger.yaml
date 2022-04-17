@@ -169,6 +169,7 @@ paths:
         - Categories
       parameters:
       - name: id
+        path: path
         required: true
         description: ID de la category  a eliminar
         schema:
