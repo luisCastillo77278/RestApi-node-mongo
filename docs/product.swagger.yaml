@@ -197,18 +197,20 @@ paths:
           content:
             application/json:
               schema:
-                nombre:
-                  type: string
-                precio:
-                  type: number
-                descripcion:
-                  type: string
-                categoria:
-                  type: string
-                id:
-                  type: string
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  precio:
+                    type: number
+                  descripcion:
+                    type: string
+                  categoria:
+                    type: string
+                  id:
+                    type: string
     delete:
-      summary:
+      summary: Permite eliminar un producto, en la base de datos
       tags:
         - Products
       parameters:
@@ -219,9 +221,20 @@ paths:
           type: string
       responses:
         "200":
-          description:
+          description: Devuelve el objeto eliminado de la base de datos
           content:
             application/json:
               schema:
                 type: object
                 properties:
+                  nombre:
+                    type: string
+                  precio:
+                    type: number
+                  descripcion:
+                    type: string
+                  categoria:
+                    type: string
+                  id:
+                    type: string
+
