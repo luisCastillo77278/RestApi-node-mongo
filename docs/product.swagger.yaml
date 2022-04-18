@@ -1,0 +1,227 @@
+openapi: 3.0.0
+info:
+  title:
+  version: 0.1.0
+paths:
+  /api/productos:
+    get:
+      summary: Retorna un objecto con los datos de los productos, así como información detallada de paginación, total de datos en la petición, total de datos y total de paginas.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Permite listar los datos de los productos con su categoria y el usuario que lo creo.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  docs:
+                    type: array
+                    items:
+                      properties:
+                        nombre: 
+                          type: string
+                        estado:
+                          type: boolean
+                        usuario:
+                          type: object
+                          properties:
+                            nombre:
+                              type: string
+                            correo:
+                              type: string
+                            rol:
+                              type: string
+                            estado:
+                              type: boolean
+                            id:
+                              type: string
+                        precio:
+                          type: number
+                        categoria:
+                          type: object
+                          properties:
+                            nombre:
+                              type: string
+                            estado:
+                              type: boolean
+                            usuario:
+                              type: string
+                            id:
+                              type: string
+                        descripcion:
+                          type: string
+                        disponible:
+                          type: boolean
+                        id:
+                          type: string
+                  totalDocs:
+                    type: number
+                  limit:
+                    type: number
+                  totalPages:
+                    type: number
+                  page:
+                    type: number
+                  pagingCounter:
+                    type: number
+                  hasPrevPag:
+                    type: boolean
+                  hasNextPag:
+                    type: boolean
+    post:
+      summary: Permite crear un producto, con su categoria y la persona que lo crea
+      tags:
+        - Products
+      requestBody:
+        description: Objeto con las propiedades para crear un producto
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre: 
+                  type: string
+                precio:
+                  type: number
+                categoria:
+                  type: string
+                descripcion:
+                  type: string
+      responses:
+        "200":
+          description: Devuelve un objeto que contiene los datos del producto creado, con el usuario que lo creo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  categoria: 
+                    type: string
+                  nombre:
+                    type: string
+                  precio:
+                    type: string
+                  descripcion:
+                    type: string
+                  usuario:
+                    type: string
+      security:
+        - ApiKeyAuth: []
+  
+  /api/productos/{id}:
+    get:
+      summary: Permite obtener un objeto de tipo producto de forma detallada con la categoria y el usuario que lo creo
+      tags:
+        - Products
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description:
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Devuelve un objeto de tipo producto con los datos del usuario y categoria del producto
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  estado:
+                    type: boolean
+                  usuario:
+                    type: object
+                    properties:
+                      nombre:
+                        type: string
+                      correo:
+                        type: string
+                      rol:
+                        type: string
+                      estado:
+                        type: boolean
+                      id:
+                        type: string
+                  precio:
+                    type: string
+                  categoria:
+                    type: object
+                    properties:
+                      nombre:
+                        type: string
+                      estado:
+                        type: boolean
+                      usuario:
+                        type: string
+                      id:
+                        type: string
+                  descripcion:
+                    type: string
+                  disponible:
+                    type: boolean
+                  id:
+                    type: string
+    put: 
+      summary: Permite editar un producto, en la base de datos
+      tags:
+        - Products
+      parameters:
+      - name: id
+        required: true
+        descripcion: Id del producto a buscar
+        schema:
+          type: string
+      requestBody:
+        required: true
+        descripcion: Objeto con las propiedades para editar un producto 
+        content:
+          application/json:
+            schema:
+              nombre:
+                type: string
+              precio:
+                type: number
+              descripcion:
+                type: string
+              categoria:
+                type: string
+      responses:
+        "200":
+          descripcion: Devuelve un objeto de tipo producto con los datos editados
+          content:
+            application/json:
+              schema:
+                nombre:
+                  type: string
+                precio:
+                  type: number
+                descripcion:
+                  type: string
+                categoria:
+                  type: string
+                id:
+                  type: string
+    delete:
+      summary:
+      tags:
+        - Products
+      parameters:
+      - name: id
+        required: true
+        description: Id del objeto producto a buscar
+        schema:
+          type: string
+      responses:
+        "200":
+          description:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
