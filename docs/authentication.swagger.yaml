@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title:
+  version: 0.1.0
+paths:
+  /api/auth/login:
+    post:
+      summary: Permite realizar el login de un usuario, y obtener el token de autenticación
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                correo:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Devuelve un objeto con los datos del usuario y el id token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  toke:
+                    type: string
+                  UserActiveAndEmailExist:
+                    type: object
+                    properties:
+                      nombre:
+                        type: string
+                      correo:
+                        type: string
+                      rol:
+                        type: string
+                      estado:
+                        type: boolean
+                      id:
+                        type: string
+  
+  /api/auth/google:
+    post:
+      summary: Permite realizar el login con una cuenta de google y obtener el token de autenticación
+      tags:
+        - Authentication
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                id_token:
+                  type: string
+      responses:
+        "200":
+          description: Devuelve un objeto con los datos del usuario y el id token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  correo:
+                    type: string
+                  password:
+                    type: string
+                  img:
+                    type: string
+                  google:
+                    type: boolean
+                  rol: 
+                    type: string

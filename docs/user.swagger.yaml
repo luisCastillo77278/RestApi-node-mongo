@@ -1,0 +1,178 @@
+openapi: 3.0.0
+info:
+  title:
+  version: 0.1.0
+paths:
+  /api/user:
+    get:
+      summary: Permite obtener un objeto con el total de usuarios y los usuarios
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Devuleve un objeto con el total de usuarios y un arreglo con todos los usuarios
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: number
+                  usuarios:
+                    type: array
+                    items:
+                      properties:
+                        nombre:
+                          type: string
+                        correo:
+                          type: string
+                        rol:
+                          type: string
+                        estado:
+                          type: boolean
+                        id:
+                          type: string
+    post:
+      summary: Permite crear un usuario en la base de datos
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string 
+                correo:
+                  type: string
+                rol:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Permite obtener un objeto con las propiedades del usuario creado
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  usuarios:
+                    type: object
+                    properties:
+                      nombre:
+                        type: string
+                      correo:
+                        type: string
+                      rol:
+                        type: string
+                      id:
+                        type: string
+
+  /api/user/{id}:
+    get:
+      summary: Permite obtener un objeto por medio del id del usuario
+      tags:
+        - Users
+      parameters:
+      - name: id
+        required: true
+        description: Id del usuario a buscar
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Devuleve un objeto con las propiedades del usuario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  correo:
+                    type: string
+                  rol:
+                    type: string
+                  estado:
+                    type: boolean
+                  id:
+                    type: string        
+    put:
+      summary: Permite editar un usuario en la base de datos
+      tags:
+        - Users
+      parameters:
+      - name: id
+        required: true
+        description: Id del usuario a editar
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                nombre:
+                  type: string
+                correo: 
+                  type: string
+                google:
+                  type: string
+                rol:
+                  type: string
+      responses:
+        "200":
+          description: Devuleve un objeto con las propiedades del usuario editado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  correo:
+                    type: string
+                  rol:
+                    type: string
+                  estado:
+                    type: boolean
+                  id:
+                    type: string       
+    delete:
+      summary: Permite eliminar un usuario en la base de datos por medio de su id
+      tags:
+        - Users
+      parameters:
+      - name: id
+        required: true
+        description: Id del usuario a eliminar
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Devuleve un objeto con las propiedades del usuario eliminado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  correo:
+                    type: string
+                  rol:
+                    type: string
+                  estado:
+                    type: boolean
+                  id:
+                    type: string 
+      security:
+        - ApiKeyAuth: []
+        

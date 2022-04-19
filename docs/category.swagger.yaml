@@ -54,3 +54,142 @@ paths:
                     type: boolean
                   hasNextPag:
                     type: boolean
+    post:
+      summary: Permite la creación de una category, hay que pasar un token
+      tags:
+        - Categories
+      requestBody:
+        description: Objeto que contiene el nombre para la creación de la category
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre: 
+                  type: string
+      responses:
+        "200":
+          description: Devuelve un objeto de tipo caterory al ser creado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  estado:
+                    type: boolean
+                  usuario:
+                    type: string
+                  id:
+                    type: string
+      security:
+        - ApiKeyAuth: []
+  /api/categories/{id}:
+    get:
+      summary: Permite obtener un objeto de tipo category el cual podemos obtener por medio de su id
+      tags:
+        - Categories
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ID del objeto category a buscar
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Permite obtener un objeto de tipo usuario mediante el id del mismo
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  id: 
+                    type: string
+                  nombre:
+                    type: string
+                  estado:
+                    type: boolean
+                  usuario: 
+                    type: object
+                    properties:
+                      nombre:
+                        type: string
+                      correo: 
+                        type: string
+                      rol:
+                        type: string
+                      estado:
+                        type: boolean
+                      id:
+                        type: string
+    put:
+      summary: Permite la creación de un objeto de tipo category, hay que pasar un token
+      tags:
+        - Categories
+      parameters:
+      - name: id
+        required: true 
+        description: ID de la category a buscar
+        schema:
+          type: string
+      requestBody:
+        description: Objeto que contiene el nombre para actualizar la category 
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+      responses:
+        "200":
+          description: Devuelve un objeto creado de tipo category.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  estado:
+                    type: boolean
+                  usuario:
+                    type: string
+                  id:
+                    type: string
+      security:
+        - ApiKeyAuth: []
+    delete:
+      summary: Permite la eliminación de una category, hay que pasar un token
+      tags:
+        - Categories
+      parameters:
+      - name: id
+        path: path
+        required: true
+        description: ID de la category  a eliminar
+        schema:
+          type: string
+      responses:
+        "200":
+          description:
+          content:
+            application/json:
+              schema: 
+                type: object
+                properties:
+                  nombre:
+                    type: string
+                  estado:
+                    type: boolean
+                  usuario:
+                    type: string
+                  id:
+                    type: string
+      security:
+        - ApiKeyAuth: []
+

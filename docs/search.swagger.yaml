@@ -5,6 +5,37 @@ info:
 paths:
   /api/buscar/{coleccion}/{termino}:
     get:
-      summary:
+      summary: Permite obtener un array de elementos dependiendo, a la coleccion que se le haga la peticion
       tags:
         - Search
+      parameters:
+      - name: coleccion
+        in: path
+        required: true
+        description: Colección de las tablas(documentos) de la db
+        schema:
+          type: string
+      - name: termino
+        in: path
+        required: false
+        description: Termino (palabra) a buscar en la coleccion de la db
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Devuelve un array de objetos de los cuales contienen los datos referentes a la coleccion, damos un ejemplo con los datos genericos que contienen las colecciones 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        nombre: 
+                          type: string
+                        id:
+                          type: string
+                        estado:
+                          type: boolean
