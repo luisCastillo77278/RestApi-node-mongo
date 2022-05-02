@@ -7,12 +7,7 @@ const url = window.location.hostname.includes('localhost')
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  const formData = {};
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const el of form.elements) {
-    if (el.name.length > 0) formData[el.name] = el.value;
-  }
+  const formData = Object.fromEntries(new FormData(event.target));
 
   const { msg, token } = await fetch(`${url}/login`, {
     method: 'POST',
@@ -25,7 +20,9 @@ form.addEventListener('submit', async (event) => {
   }
 
   console.log(token);
-  return localStorage.setItem('token', token);
+  localStorage.setItem('token', token);
+  window.location = 'chat.html';
+  return 0;
 });
 
 // eslint-disable-next-line no-unused-vars
@@ -44,6 +41,7 @@ function handleCredentialResponse(response) {
     .then(({ token }) => {
       localStorage.setItem('token', token);
       console.log(token);
+      window.location = 'chat.html';
     })
     .catch(console.warn);
 }
@@ -51,7 +49,7 @@ const btn = document.querySelector('#google_logout');
 btn.addEventListener('click', () => {
   console.log(google.accounts.id);
   google.accounts.id.disableAutoSelect();
-  google.accounts.id.revoke(localStorage.getItem('emailUser'), (done) => {
+  google.accounts.id.revoke(localStorage.getItem('emailUser'), () => {
     localStorage.clear();
     window.location.reload();
   });
